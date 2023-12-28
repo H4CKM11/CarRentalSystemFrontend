@@ -6,7 +6,7 @@ import SearchButtonGradient from '../components/common/buttons/SearchButtonGradi
 <template>
   <main>
     <!-- Hero Section -->
-    <section class="bg-[url('./assets/images/OklahomaCity.jpg')] h-[65vh] flex items-center justify-center flex-col gap-10">
+    <section class="bg-[url('./assets/images/OklahomaCity.jpg')] h-[65vh] flex items-center justify-center flex-col gap-10 bg-no-repeat ">
       <!-- Hero Section Content -->
       <article class="bg-white p-4 rounded-md w-[60vw]">
         <h1 class="text-4xl font-bold text-gray-800 mb-4">Oklahoma City Car Rentals</h1>
