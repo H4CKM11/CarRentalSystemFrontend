@@ -67,8 +67,7 @@
     <section class="my-8">
       <article class="w-[55vw] mx-auto">
         <h2 class="text-2xl font-bold text-gray-800 mb-4">Avaliable Car Rentals in Oklahoma City</h2>
-        <p class="text-gray-600 text-sm mb-4">Top tips for renting a car in Oklahoma City</p>
-        <PictureCarGrid :vehicleImages="vehicleImages" />
+        <PictureCarGrid :vehicles="vehicleInformation" />
       </article>
     </section>
   </main>
@@ -80,17 +79,21 @@ import axios from 'axios';
 import SearchButtonGradient from '../components/common/buttons/SearchButtonGradient.vue'
 import PictureCarGrid from '@/components/common/Grids/PictureCarGrid.vue';
 
-type VehicleImage = {
+type VehicleInformation = {
+  make: string;
+  model: string;
+  rate: number;
   imgURL: string;
 }
 
-const vehicleImages = ref<VehicleImage[]>([]);
+const vehicleInformation = ref<VehicleInformation[]>([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://127.0.0.1:8000/api/vehicles?include=imgURL');
+    const response = await axios.get('http://127.0.0.1:8000/api/vehicles?include=vehicleInformation');
     if (response.status === 200) {
-      vehicleImages.value = response.data.data;
+      vehicleInformation.value = response.data.data;
+      console.log(vehicleInformation.value);
     }
   }
   catch (error) {
