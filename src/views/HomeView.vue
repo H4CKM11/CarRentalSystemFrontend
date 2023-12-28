@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import SearchButtonGradient from '../components/common/buttons/SearchButtonGradient.vue'
-
-</script>
-
 <template>
   <main>
     <!-- Hero Section -->
@@ -73,10 +68,38 @@ import SearchButtonGradient from '../components/common/buttons/SearchButtonGradi
       <article class="w-[55vw] mx-auto">
         <h2 class="text-2xl font-bold text-gray-800 mb-4">Avaliable Car Rentals in Oklahoma City</h2>
         <p class="text-gray-600 text-sm mb-4">Top tips for renting a car in Oklahoma City</p>
+        <PictureCarGrid :vehicleImages="vehicleImages" />
       </article>
     </section>
   </main>
 </template>
+
+<script setup lang="ts">
+import {ref, onMounted} from 'vue';
+import axios from 'axios';
+import SearchButtonGradient from '../components/common/buttons/SearchButtonGradient.vue'
+import PictureCarGrid from '@/components/common/Grids/PictureCarGrid.vue';
+
+type VehicleImage = {
+  imgURL: string;
+}
+
+const vehicleImages = ref<VehicleImage[]>([]);
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://127.0.0.1:8000/api/vehicles?include=imgURL');
+    if (response.status === 200) {
+      vehicleImages.value = response.data.data;
+    }
+  }
+  catch (error) {
+    console.log(error);
+  }
+});
+
+
+</script>
 
 <style scoped>
 .custom-grid-cols {
